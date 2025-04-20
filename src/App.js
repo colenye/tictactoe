@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
@@ -33,9 +32,7 @@ function Row( {row, getTic} ) {
   )
 }
 function Table( {makeGameOver} ) {
-  const [globalTic, setGlobalTic] = useState();
   function getTic(tic){
-    setGlobalTic(tic);
     table[tic[0]][tic[1]] = tic[2];
     console.log(table[0]);
     console.log(table[1]);
