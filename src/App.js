@@ -6,9 +6,9 @@ let turn = 'X';
 let table = [[null, null, null],[null, null, null],[null, null, null]]
 function Square( {row, column, getTic} ) {
   const [tic, setTic] = useState();
-
+  
   function handleClick() {
-    
+    if (tic != null) return;
     getTic([row, column, turn]);
     if (turn == 'X') {
       setTic('X');
