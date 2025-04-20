@@ -1,39 +1,58 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
-function Square() {
+let turn = 'X';
+function Square( {row, column, getTic} ) {
+  const [tic, setTic] = useState();
+
+  function handleClick() {
+    getTic([row, column]);
+    if (turn == 'X') {
+      setTic('X');
+      turn = 'O';
+    } else {
+      setTic('O');
+      turn = 'X';
+    }
+  }
   return (
-    <button></button>
+    <button className="button" onClick={handleClick}>{tic}</button>
   )
 }
 
-function Row() {
+function Row( {row, getTic} ) {
   return (
     <div className="row">
-      <Square/>
-      <Square/>
-      <Square/>
+      <Square row={row} column={1} getTic={getTic}/>
+      <Square row={row} column={2} getTic={getTic}/>
+      <Square row={row} column={3} getTic={getTic}/>
     </div>
   )
 }
 function Table() {
+  const [globalTic, setGlobalTic] = useState();
+  function getTic(tic){
+    setGlobalTic(tic);
+    console.log(tic);
+  }
   return (
     <div className="table">
-      <Row/>
-      <Row/>
-      <Row/>
+      <Row row={1} getTic={getTic}/>
+      <Row row={2} getTic={getTic}/>
+      <Row row={3} getTic={getTic}/>
     </div>
   )
 }
 
 function App() {
   return (
-    <>
-      <h1>
+    <div className="App">
+      <h1 className="">
         Tictac
       </h1>
       <Table/>
-    </>
+    </div>
   );
 }
 
