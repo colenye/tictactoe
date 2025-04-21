@@ -78,13 +78,15 @@ function Table( {makeGameOver} ) {
   )
 }
 
-export default function SubGame( {exportState, pos: array}) {
+export default function SubGame( {exportState, pos}) {
   const [gameOver, setGameOver] = useState();
   function makeGameOver(player){
     if (player === '1'){
       setGameOver("https://y.yarn.co/69daa53a-7641-45ae-aea7-203c6b4a0e90_text.gif");
+      exportState(pos, 'X');
     } else {
       setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
+      exportState(pos, 'O');
     }
 
   }

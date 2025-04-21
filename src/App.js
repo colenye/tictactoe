@@ -4,25 +4,15 @@ import { useState } from 'react';
 
 let turn = 'X';
 let table = [[null, null, null],[null, null, null],[null, null, null]]
+
+function exportState(pos, winner){
+  table[pos[0]][pos[1]] = winner
+}
 function Square( {row, column, getTic} ) {
-  const [tic, setTic] = useState();
-  
-  function handleClick() {
-    if (tic != null) return;
-    getTic([row, column, turn]);
-    if (turn === 'X') {
-      setTic('X');
-      turn = 'O';
-    } else {
-      setTic('O');
-      turn = 'X';
-    }
-  }
   return (
     <>
-      <SubGame/>
+      <SubGame exportState={ exportState } pos={[row, column]}/>
     </>
-
   )
 }
 
