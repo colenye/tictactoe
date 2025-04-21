@@ -37,15 +37,18 @@
   }
 }
 
-.table {
-
+.table, .row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
 }
 
 .row {
-  
+  flex-direction: row;
 }
 
 .button {
-  height: 16px;
-  width: 8px;
+  height: 64px;
+  width: 64px;
 }

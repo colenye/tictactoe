@@ -1,5 +1,4 @@
 import './App.css';
-import SubGame from './SubGame.js'
 import { useState } from 'react';
 
 let turn = 'X';
@@ -19,9 +18,7 @@ function Square( {row, column, getTic} ) {
     }
   }
   return (
-    <>
-      <SubGame/>
-    </>
+    <button className="button" onClick={handleClick}>{tic}</button>
 
   )
 }
@@ -81,7 +78,7 @@ function Table( {makeGameOver} ) {
   )
 }
 
-function App() {
+export default function SubGame( {exportState, pos: array}) {
   const [gameOver, setGameOver] = useState();
   function makeGameOver(player){
     if (player === '1'){
@@ -102,5 +99,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
