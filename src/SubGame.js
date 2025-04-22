@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 let turn = 'X';
 let table = [[null, null, null],[null, null, null],[null, null, null]]
@@ -35,9 +35,6 @@ function Row( {row, getTic} ) {
 function Table( {makeGameOver} ) {
   function getTic(tic){
     table[tic[0]][tic[1]] = tic[2];
-    console.log(table[0]);
-    console.log(table[1]);
-    console.log(table[2]);
     for (let x = 0; x < 3; x++){
       if (table[x][0] === table[x][1] && table[x][1] === table[x][2] && (table[x][2] === 'X' || table[x][2] === 'O')){
         if(table[x][2] === 'X'){
@@ -78,26 +75,29 @@ function Table( {makeGameOver} ) {
   )
 }
 
-export default function SubGame( {exportState, pos}) {
-  const [gameOver, setGameOver] = useState();
-  function makeGameOver(player){
-    if (player === '1'){
-      setGameOver("https://y.yarn.co/69daa53a-7641-45ae-aea7-203c6b4a0e90_text.gif");
-      exportState(pos, 'X');
-    } else {
-      setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
-      exportState(pos, 'O');
-    }
 
+
+export default function SubGame({ exportState, pos, table, getTic }) {
+    const [player, makeGameOver] = useState();
+  
+    useEffect(() => {
+      if (player === '1') {
+        const newTable = table.map(row => [...row]);
+        newTable[pos[0]][pos[1]] = 'X';
+        getTic();
+        exportState(newTable);
+      } else if (player === '2') {
+        const newTable = table.map(row => [...row]);
+        newTable[pos[0]][pos[1]] = 'O';
+        getTic();
+        exportState(newTable);
+      }
+    }, [player]);
+  
+    return (
+      <div className="App">
+        <h1>Tictac</h1>
+        <Table makeGameOver={makeGameOver} />
+      </div>
+    );
   }
-  return (
-    <div className="App">
-      <h1 className="">
-        Tictac
-      </h1>
-
-      <img src={gameOver} alt="suggon"/>
-      <Table makeGameOver = {makeGameOver} />
-    </div>
-  );
-}

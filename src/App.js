@@ -2,81 +2,76 @@ import './App.css';
 import SubGame from './SubGame.js'
 import { useState } from 'react';
 
-let turn = 'X';
-let table = [[null, null, null],[null, null, null],[null, null, null]]
-
-function exportState(pos, winner){
-  table[pos[0]][pos[1]] = winner
-}
-function Square( {row, column, getTic} ) {
+function Square( {row, column, getTic, setTable, table} ) {
   return (
     <>
-      <SubGame exportState={ exportState } pos={[row, column]}/>
+      <SubGame exportState={ setTable } pos={[row, column]} table={table} getTic={getTic}/>
     </>
   )
 }
 
-function Row( {row, getTic} ) {
+function Row( {row, getTic, setTable, table} ) {
   return (
     <div className="row">
-      <Square row={row} column={0} getTic={getTic}/>
-      <Square row={row} column={1} getTic={getTic}/>
-      <Square row={row} column={2} getTic={getTic}/>
+      <Square row={row} column={0} getTic={getTic} setTable={setTable} table={table}/>
+      <Square row={row} column={1} getTic={getTic} setTable={setTable} table={table}/>
+      <Square row={row} column={2} getTic={getTic} setTable={setTable} table={table}/>
     </div>
   )
 }
-function Table( {makeGameOver} ) {
-  function getTic(tic){
-    table[tic[0]][tic[1]] = tic[2];
-    console.log(table[0]);
-    console.log(table[1]);
-    console.log(table[2]);
-    for (let x = 0; x < 3; x++){
-      if (table[x][0] === table[x][1] && table[x][1] === table[x][2] && (table[x][2] === 'X' || table[x][2] === 'O')){
-        if(table[x][2] === 'X'){
-          makeGameOver('1');
-        } else{
-          makeGameOver('2');
-        }
-      } 
-      if (table[0][x] === table[1][x] && table[1][x] === table[2][x] && (table[2][x] === 'X' || table[2][x] === 'O')){
-        if(table[2][x] === 'X'){
-          makeGameOver('1');
-        } else{
-          makeGameOver('2');
-        }
-      }
-    }
-    if (table[0][0] === table[1][1] && table[1][1] === table[2][2] && (table[2][2] === 'X' || table[2][2] === 'O')){
-      if(table[2][2] === 'X'){
-        makeGameOver('1');
-      } else{
-        makeGameOver('2');
-      }
-    } 
-    if (table[0][2] === table[1][1] && table[1][1] === table[2][0] && (table[2][0] === 'X' || table[2][0] === 'O')){
-      if(table[2][0] === 'X'){
-        makeGameOver('1');
-      } else{
-        makeGameOver('2');
-      }
-    } 
-  }
+function Table( {makeGameOverLarge, setTable, table, getTic} ) {
   return (
     <div className="table">
-      <Row row={0} getTic={getTic}/>
-      <Row row={1} getTic={getTic}/>
-      <Row row={2} getTic={getTic}/>
+      <Row row={0} getTic={getTic} setTable={setTable} table={table}/>
+      <Row row={1} getTic={getTic} setTable={setTable} table={table}/>
+      <Row row={2} getTic={getTic} setTable={setTable} table={table}/>
     </div>
   )
 }
 
 function App() {
   const [gameOver, setGameOver] = useState();
-  function makeGameOver(player){
+  const [table, setTable] = useState([[null, null, null],[null, null, null],[null, null, null]]);
+  console.log(table[0]);
+  console.log(table[1]);
+  console.log(table[2]);
+
+  function getTic(){
+    for (let x = 0; x < 3; x++){
+      if (table[x][0] === table[x][1] && table[x][1] === table[x][2] && (table[x][2] === 'X' || table[x][2] === 'O')){
+        if(table[x][2] === 'X'){
+          makeGameOverLarge('1');
+        } else{
+          makeGameOverLarge('2');
+        }
+      } 
+      if (table[0][x] === table[1][x] && table[1][x] === table[2][x] && (table[2][x] === 'X' || table[2][x] === 'O')){
+        if(table[2][x] === 'X'){
+          makeGameOverLarge('1');
+        } else{
+          makeGameOverLarge('2');
+        }
+      }
+    }
+    if (table[0][0] === table[1][1] && table[1][1] === table[2][2] && (table[2][2] === 'X' || table[2][2] === 'O')){
+      if(table[2][2] === 'X'){
+        makeGameOverLarge('1');
+      } else{
+        makeGameOverLarge('2');
+      }
+    } 
+    if (table[0][2] === table[1][1] && table[1][1] === table[2][0] && (table[2][0] === 'X' || table[2][0] === 'O')){
+      if(table[2][0] === 'X'){
+        makeGameOverLarge('1');
+      } else{
+        makeGameOverLarge('2');
+      }
+    } 
+  }
+  function makeGameOverLarge(player){
     if (player === '1'){
-      setGameOver("https://y.yarn.co/69daa53a-7641-45ae-aea7-203c6b4a0e90_text.gif");
-    } else {
+      setGameOver("https://media.tenor.com/Rt-62V5p27MAAAAe/player1wins.png");
+    } if (player == '2') {
       setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
     }
 
@@ -88,7 +83,7 @@ function App() {
       </h1>
 
       <img src={gameOver} alt="suggon"/>
-      <Table makeGameOver = {makeGameOver} />
+      <Table makeGameOverLarge = {makeGameOverLarge} setTable={ setTable } table={table} getTic={getTic}/>
     </div>
   );
 }
