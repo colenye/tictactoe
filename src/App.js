@@ -71,7 +71,7 @@ function App() {
   function makeGameOverLarge(player){
     if (player === '1'){
       setGameOver("https://media.tenor.com/Rt-62V5p27MAAAAe/player1wins.png");
-    } if (player == '2') {
+    } if (player === '2') {
       setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
     }
 
