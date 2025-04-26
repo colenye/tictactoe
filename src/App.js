@@ -84,7 +84,7 @@ function App() {
         Tictac
       </h1>
 
-      <img src={gameOver} alt="f"/>
+      <img src={gameOver} alt="ff"/>
       <Table makeGameOverLarge = {makeGameOverLarge} setTable={ setTable } table={table} getTic={getTic}/>
     </div>
   );
