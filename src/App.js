@@ -1,5 +1,6 @@
 import './App.css';
 import SubGame from './SubGame.js'
+import logo from './logo512.png'
 import { useState } from 'react';
 
 function Square( {row, column, getTic, setTable, table} ) {
@@ -32,16 +33,16 @@ function Table( {makeGameOverLarge, setTable, table, getTic} ) {
 function App() {
   const [gameOver, setGameOver] = useState();
   const [table, setTable] = useState([[null, null, null],[null, null, null],[null, null, null]]);
-  console.log(table[0]);
-  console.log(table[1]);
-  console.log(table[2]);
+
 
   function getTic(){
     for (let x = 0; x < 3; x++){
       if (table[x][0] === table[x][1] && table[x][1] === table[x][2] && (table[x][2] === 'X' || table[x][2] === 'O')){
         if(table[x][2] === 'X'){
+          console.log("player 1 won");
           makeGameOverLarge('1');
         } else{
+          console.log("player 2 won");
           makeGameOverLarge('2');
         }
       } 
@@ -70,7 +71,8 @@ function App() {
   }
   function makeGameOverLarge(player){
     if (player === '1'){
-      setGameOver("https://media.tenor.com/Rt-62V5p27MAAAAe/player1wins.png");
+      setGameOver(logo);
+      
     } if (player === '2') {
       setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
     }
@@ -82,7 +84,7 @@ function App() {
         Tictac
       </h1>
 
-      <img src={gameOver} alt="suggon"/>
+      <img src={gameOver} alt="f"/>
       <Table makeGameOverLarge = {makeGameOverLarge} setTable={ setTable } table={table} getTic={getTic}/>
     </div>
   );
