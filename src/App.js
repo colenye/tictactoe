@@ -3,11 +3,12 @@ import { useState } from 'react';
 
 let turn = 'X';
 let table = [[null, null, null],[null, null, null],[null, null, null]]
+let gameOve = false;
 function Square( {row, column, getTic} ) {
   const [tic, setTic] = useState();
   
   function handleClick() {
-    if (tic != null) return;
+    if ((tic != null) || gameOve) return;
     getTic([row, column, turn]);
     if (turn === 'X') {
       setTic('X');
@@ -44,6 +45,7 @@ function Table( {makeGameOver} ) {
         } else{
           makeGameOver('2');
         }
+        gameOve = true;
       } 
       if (table[0][x] === table[1][x] && table[1][x] === table[2][x] && (table[2][x] === 'X' || table[2][x] === 'O')){
         if(table[2][x] === 'X'){
@@ -51,6 +53,7 @@ function Table( {makeGameOver} ) {
         } else{
           makeGameOver('2');
         }
+        gameOve = true;
       }
     }
     if (table[0][0] === table[1][1] && table[1][1] === table[2][2] && (table[2][2] === 'X' || table[2][2] === 'O')){
@@ -59,6 +62,7 @@ function Table( {makeGameOver} ) {
       } else{
         makeGameOver('2');
       }
+      gameOve = true;
     } 
     if (table[0][2] === table[1][1] && table[1][1] === table[2][0] && (table[2][0] === 'X' || table[2][0] === 'O')){
       if(table[2][0] === 'X'){
@@ -66,6 +70,7 @@ function Table( {makeGameOver} ) {
       } else{
         makeGameOver('2');
       }
+      gameOve = true;
     } 
   }
   return (
