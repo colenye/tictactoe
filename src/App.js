@@ -1,5 +1,6 @@
 import './App.css';
 import SubGame from './SubGame.js'
+import logo from './logo512.png'
 import { useState } from 'react';
 
 function Square( {row, column, getTic, setTable, table} ) {
@@ -70,8 +71,7 @@ function App() {
   }
   function makeGameOverLarge(player){
     if (player === '1'){
-      setGameOver("br");
-      setGameOver("https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fview%2Fplayer1-player-one-%25D8%25A8%25D9%2584%25D8%25A7%25D9%258A%25D8%25B1%25D9%25A1-%25D8%25A8%25D9%2584%25D8%25A7%25D9%258A%25D8%25B11-gif-20660986&psig=AOvVaw2U2IHnPxaDxp1uOA_TuV9Q&ust=1745728055575000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjiivbt9IwDFQAAAAAdAAAAABAE");
+      setGameOver(logo);
       
     } if (player == '2') {
       setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
