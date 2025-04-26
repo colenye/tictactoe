@@ -32,16 +32,16 @@ function Table( {makeGameOverLarge, setTable, table, getTic} ) {
 function App() {
   const [gameOver, setGameOver] = useState();
   const [table, setTable] = useState([[null, null, null],[null, null, null],[null, null, null]]);
-  console.log(table[0]);
-  console.log(table[1]);
-  console.log(table[2]);
+
 
   function getTic(){
     for (let x = 0; x < 3; x++){
       if (table[x][0] === table[x][1] && table[x][1] === table[x][2] && (table[x][2] === 'X' || table[x][2] === 'O')){
         if(table[x][2] === 'X'){
+          console.log("player 1 won");
           makeGameOverLarge('1');
         } else{
+          console.log("player 2 won");
           makeGameOverLarge('2');
         }
       } 
@@ -70,7 +70,9 @@ function App() {
   }
   function makeGameOverLarge(player){
     if (player === '1'){
-      setGameOver("https://media.tenor.com/Rt-62V5p27MAAAAe/player1wins.png");
+      setGameOver("br");
+      setGameOver("https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fview%2Fplayer1-player-one-%25D8%25A8%25D9%2584%25D8%25A7%25D9%258A%25D8%25B1%25D9%25A1-%25D8%25A8%25D9%2584%25D8%25A7%25D9%258A%25D8%25B11-gif-20660986&psig=AOvVaw2U2IHnPxaDxp1uOA_TuV9Q&ust=1745728055575000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjiivbt9IwDFQAAAAAdAAAAABAE");
+      
     } if (player == '2') {
       setGameOver("https://media.tenor.com/lGhAoEiUlTcAAAAM/player2wins.gif");
     }
@@ -82,7 +84,7 @@ function App() {
         Tictac
       </h1>
 
-      <img src={gameOver} alt="suggon"/>
+      <img src={gameOver} alt="f"/>
       <Table makeGameOverLarge = {makeGameOverLarge} setTable={ setTable } table={table} getTic={getTic}/>
     </div>
   );
