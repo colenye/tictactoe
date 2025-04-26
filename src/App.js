@@ -3,29 +3,29 @@ import SubGame from './SubGame.js'
 import logo from './logo512.png'
 import { useState } from 'react';
 
-function Square( {row, column, getTic, setTable, table} ) {
+function Square( {row, column, getTic, setTable, table, gameOver} ) {
   return (
     <>
-      <SubGame exportState={ setTable } pos={[row, column]} table={table} getTic={getTic}/>
+      <SubGame exportState={ setTable } pos={[row, column]} table={table} getTic={getTic} gameOver={gameOver}/>
     </>
   )
 }
 
-function Row( {row, getTic, setTable, table} ) {
+function Row( {row, getTic, setTable, table, gameOver} ) {
   return (
     <div className="row">
-      <Square row={row} column={0} getTic={getTic} setTable={setTable} table={table}/>
-      <Square row={row} column={1} getTic={getTic} setTable={setTable} table={table}/>
-      <Square row={row} column={2} getTic={getTic} setTable={setTable} table={table}/>
+      <Square row={row} column={0} getTic={getTic} setTable={setTable} table={table} gameOver = {gameOver}/>
+      <Square row={row} column={1} getTic={getTic} setTable={setTable} table={table} gameOver = {gameOver}/>
+      <Square row={row} column={2} getTic={getTic} setTable={setTable} table={table} gameOver = {gameOver}/>
     </div>
   )
 }
-function Table( {makeGameOverLarge, setTable, table, getTic} ) {
+function Table( {gameOver, setTable, table, getTic} ) {
   return (
     <div className="table">
-      <Row row={0} getTic={getTic} setTable={setTable} table={table}/>
-      <Row row={1} getTic={getTic} setTable={setTable} table={table}/>
-      <Row row={2} getTic={getTic} setTable={setTable} table={table}/>
+      <Row row={0} getTic={getTic} setTable={setTable} table={table} gameOver = {gameOver}/>
+      <Row row={1} getTic={getTic} setTable={setTable} table={table} gameOver = {gameOver}/>
+      <Row row={2} getTic={getTic} setTable={setTable} table={table} gameOver = {gameOver}/>
     </div>
   )
 }
@@ -36,6 +36,7 @@ function App() {
 
 
   function getTic(){
+    
     for (let x = 0; x < 3; x++){
       if (table[x][0] === table[x][1] && table[x][1] === table[x][2] && (table[x][2] === 'X' || table[x][2] === 'O')){
         if(table[x][2] === 'X'){
@@ -85,7 +86,7 @@ function App() {
       </h1>
 
       <img src={gameOver} alt="f"/>
-      <Table makeGameOverLarge = {makeGameOverLarge} setTable={ setTable } table={table} getTic={getTic}/>
+      <Table gameOver = {gameOver} setTable={ setTable } table={table} getTic={getTic}/>
     </div>
   );
 }
